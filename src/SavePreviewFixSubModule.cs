@@ -8,7 +8,8 @@ namespace SavePreviewFix
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
-            new Harmony("savepreviewfix.bannerlord").PatchAll();
+            // Pass the assembly explicitly: the parameterless PatchAll() finds it from the call stack, which can miss our assembly.
+            new Harmony("savepreviewfix.bannerlord").PatchAll(typeof(SavePreviewFixSubModule).Assembly);
         }
     }
 }
